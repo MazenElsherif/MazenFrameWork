@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,8 +64,8 @@ public class TestBase extends AbstractTestNGCucumberTests {
     @Parameters({"browser"})
     public void start(@Optional("chrome") String browername,Method method) throws ATUTestRecorderException {
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        
+        
         if(browername.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver=new ChromeDriver(chromeopthion());}
@@ -133,7 +134,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
 
 
     public void waitelementByXpath(String element) {
-        WebDriverWait wait=new WebDriverWait(driver, 20);
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(prop.getProperty(element)))));
 
     }
@@ -246,10 +247,16 @@ public class TestBase extends AbstractTestNGCucumberTests {
     public static ChromeOptions chromeopthion() {
         ChromeOptions option =new ChromeOptions();
         HashMap<String, Object> chromeprefs=new HashMap<String, Object>();
+        
         chromeprefs.put("profile.default.content_settings.popups", 0);
         chromeprefs.put("download.default_directory", downloadpath);
         option.setExperimentalOption("prefs", chromeprefs);
-        option.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        option.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+        option.addArguments("--disable-gpu");
+        option.addArguments("--disable-dev-shm-usage");
+        option.addArguments("--no-sandbox");
+        option.addArguments("--remote-allow-origins=*");
+
         return option;
     }
     public void downloadfileByXpath(String element) {
@@ -335,7 +342,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
         robot.keyRelease(key2);
     }
     public void waitelementByid(String element) {
-        WebDriverWait wait=new WebDriverWait(driver, 20);
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(prop.getProperty(element)))));
 
     }
@@ -440,7 +447,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
 
     }
     public void WaitAlert() {
-        WebDriverWait wait=new WebDriverWait(driver, 20);
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.alertIsPresent());
     }
 

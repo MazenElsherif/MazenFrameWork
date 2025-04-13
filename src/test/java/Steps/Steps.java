@@ -14,17 +14,17 @@ public class Steps extends TestBase {
 	public Steps() throws IOException {
 		super();
 	}
-	@Before
-	@Given("Setup Driver")
-	public void setup_driver() {
-		WebDriverManager.chromedriver().setup();
-		driver=new ChromeDriver();
-		driver.manage().window().maximize();
-	}
-	@After
-	public void end() {
-		driver.quit();
-	}
+//	@Before
+//	@Given("Setup Driver")
+//	public void setup_driver() {
+//		WebDriverManager.chromedriver().setup();
+//		driver=new ChromeDriver();
+//		driver.manage().window().maximize();
+//	}
+//	@After
+//	public void end() {
+//		driver.quit();
+//	}
 
 	@Given("Iam in {string}")
 	public void iam_in(String string) {
