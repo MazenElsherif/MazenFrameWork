@@ -50,7 +50,8 @@ public class Steps extends TestBase {
 	}
 
 	@When("I Click on {string} By Xpath")
-	public void i_click_on_by_xpath(String string) {
+	public void i_click_on_by_xpath(String string) throws InterruptedException {
+	
 		waitelementByXpath(string);
 	    ClickByXpath(string);
 	}

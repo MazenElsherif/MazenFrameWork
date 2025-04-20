@@ -102,7 +102,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
         else {
             logger.log(LogStatus.SKIP, "Test Skipped");
         }
-        driver.quit();
+//        driver.quit();
 
     }
     @BeforeSuite
@@ -134,8 +134,9 @@ public class TestBase extends AbstractTestNGCucumberTests {
 
 
     public void waitelementByXpath(String element) {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(prop.getProperty(element)))));
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(element))));
+      
 
     }
     public void AssertequalmethodByXpath(String actual,String expected) {
@@ -343,7 +344,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
     }
     public void waitelementByid(String element) {
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(prop.getProperty(element)))));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(prop.getProperty(element))));
 
     }
     public void AssertequalmethodByid(String actual,String expected) {
